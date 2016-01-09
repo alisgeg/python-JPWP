@@ -24,7 +24,7 @@ if __name__ == '__main__':
 		typeOfQuestion = 'text'
 
 	elif option == 3:
-		linkToFlag = raw_input("Paste a link to flag (in .jpg format): ")
+		linkToFlag = raw_input("Paste a link to flag (in .jpg or .png format): ")
 		content = "checkflag(" + linkToFlag + ")"
 		typeOfQuestion = 'image'
 
@@ -39,9 +39,6 @@ if __name__ == '__main__':
 
 
 	payload = {'address': '', 'port': numberOfPort, 'type': typeOfQuestion, 'content': content}
-	# payload = payload.decode('utf8', 'ignore')
-	# check_call(["curl", "-H", "\"Content-Type:application/json\"", "--data", json.dumps(payload), "-X", "POST", "http://httpbin.org/", "--local-port", numberOfPort])
-	# curl -H "Content-Type:application/json" --data "{checkflag(http://www.flagpictures.org/downloads/print/slovenia1.jpg)}" -X POST localhost:8009 --local-port RANGE
-
+	
 	r = requests.post("http://localhost:8009", params = json.dumps(payload))
 	print r.text

@@ -29,8 +29,6 @@ def respond(self, content, address = "", port = 0):
         self.send_response(200)
         self.end_headers()
         headers = {'content-type': 'text/plain'}
-        print "sending response to:"
-        print "http://%s:%s" % (address, port)
         requests.post("http://%s:%s" % (address, port), params = content[:2048], data=content, headers=headers)
  
  
@@ -62,27 +60,22 @@ class CountriesHandler(BaseHTTPRequestHandler):
         patternCheckflag = re.compile("checkflag\(https?\:.*\)$")
  
         if re.match(patternCountry, requestContent):
-            print 1
             requestContent = requestContent.replace(' ', '_')
             country1 = requestContent[requestContent.index("(")+1:requestContent.index(")")]
             respond(self, count.country(country1), address, port)
  
         elif re.match(patternCountryTag, requestContent):
-            print 2
             requestContent = requestContent.replace(' ', '_')
-            print requestContent
             country1 = requestContent[requestContent.index("(")+1:requestContent.index(")")]
-            print country1
             tag = requestContent[requestContent.index(";")+1:]
             tag = tag[tag.index("(")+1:tag.index(")")]
-            print tag
             respond(self, count.countryTag(country1, tag), address, port)
  
         elif re.match(patternCheckflag, requestContent):
             requestType = "checkingFlag"
             url = requestContent[requestContent.index("(")+1:requestContent.index(")")]
  
-            if dataaccess.isAlreadyChecked(url, requestType):
+            if dataaccess.isFlagAlreadyChecked(url, requestType):
                 tmp = dataaccess.getCountryFromUrl(url, requestType)
                 response_content = tmp
             else:
@@ -92,21 +85,12 @@ class CountriesHandler(BaseHTTPRequestHandler):
                 respond(self, response_content, address, port)
  
         elif re.match(patternGetflag, requestContent):
-            print 4
             requestContent = requestContent.replace(' ', '_')
             countryName = requestContent[requestContent.index("(")+1:requestContent.index(")")]
-            countryName.lower().capitalize()
-            print countryName
-            # for el in countryName.findAll(" "):
-            #   index = countryName.index(" ")
-            #   countryName[index] = "_"
-            #   countryName[index+1] = countryName[index+1:].capitalize()
- 
-            print countryName
+            countryName.lower().capitalize() 
             url = "http://www.sciencekids.co.nz/images/pictures/flags680/" + countryName + ".jpg"
             respond(self, url, address, port)
  
-        return
  
 def cacheAndResolveCountryName(url):
     import urllib2

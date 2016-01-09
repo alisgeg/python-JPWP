@@ -47,10 +47,8 @@ def dehtml(text):
 def country(country):
 	requestType = "country"
 	if dataaccess.isAlreadyCached(country, requestType):
-		print "document for " + country + " is already in our database!"
 		content = dataaccess.getDocument(country, requestType)
 	else:
-		print "downloading document for " + country
 		site = "https://en.wikipedia.org/wiki/"
 		url = site + country
 		content = urllib2.urlopen(url).read()

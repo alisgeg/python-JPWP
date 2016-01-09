@@ -6,9 +6,7 @@ from scipy.misc import imresize
 import numpy as np
 
 def compare(givenImageName):
-	# print "reading %s..." % (givenImageName)
 	givenImage = imagereader.read(givenImageName)
-	# print "%sx%sx%s" % (len(givenImage), len(givenImage[0]), len(givenImage[0][0]))
 	f = open('countryNames.txt', 'r')
 	listOfCountries = []
 	listOfDiff = []
@@ -18,8 +16,6 @@ def compare(givenImageName):
 		tmpFileName = el
 		listOfCountries.append(el)
 		currentImage = imagereader.read('./flags/' + tmpFileName)
-		# currentImage = open('./flags/' + tmpFileName, 'r')
-		# currentImage = mpimg.imread(currentImage)
 
 		x = currentImage.shape[0]
 		y = currentImage.shape[1]
@@ -44,9 +40,6 @@ def compare(givenImageName):
 
 	index = listOfDiff.index(min(listOfDiff))
 	
-
-	# print listOfCountries[index]
-	# listOfCountries[index] = listOfCountries[index][:listOfCountries[index].index(".")-1]
 	return listOfCountries[index]
 
 

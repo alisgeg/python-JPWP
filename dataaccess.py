@@ -11,7 +11,7 @@ def isAlreadyCached(countryName, requestType):
 	else:
 		return False
 
-def isAlreadyChecked(url, requestType):
+def isFlagAlreadyChecked(url, requestType):
 	if posts.find_one({"url": url, "requestType": requestType}) != None:
 		return True
 	else:

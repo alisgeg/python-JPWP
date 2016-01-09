@@ -13,7 +13,6 @@ def downloadFlags(listOfCountries):
 			downloadFlag(url, el)
 		except:
 			print "unable to download: " + el
-	return 0
 
 def downloadFlag(url, el):
 	flag = urllib2.urlopen(url).read()
@@ -26,6 +25,4 @@ if __name__ == '__main__':
 	f = open('countryNames.txt', 'r')
 	listOfCountries = f.read()
 	listOfCountries = listOfCountries.split(' ')
-	# print len(listOfCountries)
-
 	downloadFlags(listOfCountries)
