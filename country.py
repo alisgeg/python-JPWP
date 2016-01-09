@@ -87,20 +87,13 @@ def countryTag(countryName, tag):
 	print tag
 	string = country(countryName)
 	output = ""
+	tag = " " + tag + " "
+	tag1 = " " + tag + "."
+	tag2 = " " + tag + ","
 
 	listOfSenteces = string.split(".")
 	for sentence in listOfSenteces:
-		if sentence.find(tag)>=0:
+		if sentence.find(tag)>=0 or sentence.find(tag1)>=0 or sentence.find(tag2)>=0:
 			output = output + sentence + ". \n"
-	
-	# while string != "" :
-		# if string.find(".")>=0:
-			# sentence = string[:string.index(".")+1]
-			# if sentence.find(tag)>=0:
-			# 	# print "jestem w ifie"
-			# 	output = output + sentence + "\n"
-			# 	# print output
-			# # if string.index(".")+1<len(string):
-			# string = string[string.index(".")+1:]
 	return output
 
