@@ -1,8 +1,9 @@
-#dane kontaktowe: e-mail: alicjag@student.agh.edu.pl
+#opis
+dane kontaktowe: e-mail: alicjag@student.agh.edu.pl
 
 
 Aby uruchomić aplikację należy:
--utworzyć folder ./flags
+-utworzyć folder /flags w miejscu, gdzie znajduje się reszta plików,
 -pobrać flagi za pomocą skryptu:
 	python downloadFlags.py
 -uruchomić serwer (wystartuje on na porcie 8009):

@@ -1,5 +1,4 @@
-#dane kontaktowe: e-mail: alicjag@student.agh.edu.pl
-
+#opis
 
 Aby uruchomić aplikację należy:
 -utworzyć folder /flags w miejscu, gdzie znajduje się reszta plików,
