@@ -1,0 +1,11 @@
+*.pyc
+Flag-Poland.jpg
+test/
+flags/
+path/
+*.jpg
+*.png
+myimage.safe
+myimage1.py
+.ipynb_checkpoints/
+
