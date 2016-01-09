@@ -2,13 +2,13 @@ import urllib2
 import os
 import imagereader
 import sys
+from scipy.misc import imresize
+import numpy as np
 
 def compare(givenImageName):
-	print "reading %s..." % (givenImageName)
+	# print "reading %s..." % (givenImageName)
 	givenImage = imagereader.read(givenImageName)
-	from scipy.misc import imresize
-	import numpy as np
-	print "%sx%sx%s" % (len(givenImage), len(givenImage[0]), len(givenImage[0][0]))
+	# print "%sx%sx%s" % (len(givenImage), len(givenImage[0]), len(givenImage[0][0]))
 	f = open('countryNames.txt', 'r')
 	listOfCountries = []
 	listOfDiff = []
@@ -45,7 +45,7 @@ def compare(givenImageName):
 	index = listOfDiff.index(min(listOfDiff))
 	
 
-	print listOfCountries[index]
+	# print listOfCountries[index]
 	# listOfCountries[index] = listOfCountries[index][:listOfCountries[index].index(".")-1]
 	return listOfCountries[index]
 
@@ -59,4 +59,4 @@ def calculateColorDiff(image1, image2):
 	return diff
 
 if __name__ == '__main__':
-	compare('test.png')
+	compare('test.jpg')

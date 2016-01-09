@@ -90,10 +90,10 @@ class CountriesHandler(BaseHTTPRequestHandler):
 				response_content = tmp
 			else:
 				image = urllib2.urlopen(url).read()
-				# tmpFileName = 'test.' + extension
-				# with open(tmpFileName, 'w+') as f:
-				# 	f.write(image)
-				country = compare('test.png')
+				tmpFileName = 'test.' + extension
+				with open(tmpFileName, 'w+') as f:
+					f.write(image)
+				country = compare(tmpFileName)
 				country = country[:-4]
 				response_content = country
 				dataaccess.saveUrl(country, "checkingFlag", url)
