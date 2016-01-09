@@ -27,7 +27,7 @@ def compare(givenImageName):
 		givenImage = imresize(givenImage, (x, y), interp='bilinear')
 
 		givenImageInt32 = np.empty(currentImage.shape, dtype=np.int32)
-		np.copyto(givenImageInt32, givenImage, casting='unsafe')
+		np.copyto(givenImageInt32, givenImage[:,:,:3], casting='unsafe')
 
 		currentImageInt32 = np.empty(currentImage.shape, dtype=np.int32)
 		np.copyto(currentImageInt32, currentImage, casting='unsafe')
