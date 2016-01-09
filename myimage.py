@@ -6,6 +6,12 @@ from scipy.misc import imresize
 import numpy as np
 
 def compare(givenImageName):
+	"""Funkcja, która porównuje podobieństwo obrazków.
+	Podany obrazek porównywany jest z flagami wszystkich państw.
+	Wywoływana jest funkcja calculateColorDiff, odejmująca od siebie dwa obrazki. 
+	Róznica zapisywana jest na listę, następnie jest przeskalowana, a na koniec
+	zwracana jest nazwa państwa, której przypisana jest najmniejsza różnica."""
+
 	givenImage = imagereader.read(givenImageName)
 	f = open('countryNames.txt', 'r')
 	listOfCountries = []
@@ -44,6 +50,9 @@ def compare(givenImageName):
 
 
 def calculateColorDiff(image1, image2):
+	"""Funkcja, która liczy róznicę pomiędzy dwoma podanymi obrazkami na każdym pikselu.
+	Odejmuje ona od siebie kolory RGB, a następnie zwraca ich sumę."""
+
 	import numpy as np
 	diff1 = sum(sum(np.sqrt(abs(image1[:,:,0]-image2[:,:,0]))))
 	diff2 = sum(sum(np.sqrt(abs(image1[:,:,1]-image2[:,:,1]))))

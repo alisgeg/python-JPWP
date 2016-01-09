@@ -5,6 +5,8 @@ from subprocess import call, check_call
 numberOfPort = 0
 
 if __name__ == '__main__':
+	"""Uruchomienie tego skryptu powoduje wysłanie do serwera JSONa złożonego z treści pobranej od użytkownika."""
+
 	print "Which information do you need? Choose one option (type a number):"
 	print "1) All information about country."
 	print "2) Specific information about country."
@@ -32,7 +34,6 @@ if __name__ == '__main__':
 		countryName = raw_input("Type a name of country whose flag you want: ")
 		content = "country(" + countryName + ");getflag"
 		typeOfQuestion = 'image'
-
 
 	else:
 		print "Invalid data."

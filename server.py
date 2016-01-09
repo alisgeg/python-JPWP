@@ -15,11 +15,13 @@ import dataaccess
 reload(sys)  
 sys.setdefaultencoding('utf8')
  
- 
 HOST_NAME = "localhost"
 PORT_NUMBER = 8009
  
 def respond(self, content, address = "", port = 0):
+    """Funkcja, która wysyła odpowiedź na wysłany w JSONie adres. 
+    W przypadku pierwszym jest to odpowiedź na generowane przez skrypt client.py zapytanie."""
+
     if address == "" and port == 0:
         self.send_response(200)
         self.send_header('Content-type','text-html')
@@ -34,8 +36,14 @@ def respond(self, content, address = "", port = 0):
  
 class CountriesHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+        """Reakcja serwera na otyrzymaną metodę POST.
+        Pobierana jest treść zapytania, a następnie porównywana jest ona z odpowiednimi
+        wyrażeniami regularnymi, w celu zidentyfikowania typu zapytania.
+        W zależności od typu zapytania wywoływane są odpowiednie funkcje
+        lub treść pobierana jest z bazy danych. Potem wynik wysyłany jest 
+        za pomocą metody respond."""
  
-        country = "Poland"
+        # country = "Poland"
         filename = argv
  
         length = int(self.headers['Content-Length'])
@@ -93,6 +101,10 @@ class CountriesHandler(BaseHTTPRequestHandler):
  
  
 def cacheAndResolveCountryName(url):
+    """Funkcja wykorzystywana w zapytaniu typu checkflag(url).
+    Tworzy (lub nadpisuje) plik, w którym zapisuje pobraną z urla flagę.
+    Potem wywołuje funkcję myimage.compare."""
+
     import urllib2
     from myimage import compare
     extension = url[-3:]
@@ -104,6 +116,8 @@ def cacheAndResolveCountryName(url):
     return resName
  
 if __name__ == '__main__':
+    """Włączenie serwera."""
+
     server_class = HTTPServer
     httpd = server_class((HOST_NAME, PORT_NUMBER), CountriesHandler)
     print time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, PORT_NUMBER)

@@ -9,6 +9,8 @@ from traceback import print_exc
 import dataaccess
 
 class _DeHTMLParser(HTMLParser):
+	"""Klasa, która ma za zadanie parsować treść htmla i wybierać z niego zawartość."""
+
 	def __init__(self):
 		HTMLParser.__init__(self)
 		self.__text = []
@@ -34,6 +36,8 @@ class _DeHTMLParser(HTMLParser):
 
 
 def dehtml(text):
+	"""Funkcja, która inicjuje obiekt klasy _DeHTMLParser."""
+
 	try:
 		parser = _DeHTMLParser()
 		parser.feed(text)
@@ -45,6 +49,9 @@ def dehtml(text):
 
 
 def country(country):
+	""""Funkcja, która obsługuje zapytanie typu country(country_name). 
+	Pobiera zawartośc z bazy danych/z wikiedii, parsuje zawartośc i zwraca ją w formie stringa."""
+
 	requestType = "country"
 	if dataaccess.isAlreadyCached(country, requestType):
 		content = dataaccess.getDocument(country, requestType)
@@ -56,11 +63,9 @@ def country(country):
 
 	soup = BeautifulSoup(content, 'html.parser')
 
-
 	body = soup.body
 	div = soup.body.find('div', id='mw-content-text')
 	p = div.find_all('p', recursive = False)
-
 
 	string = ""
 	for el in p:
@@ -81,8 +86,9 @@ def country(country):
 	return string2
 
 def countryTag(countryName, tag):
-	print countryName
-	print tag
+	""""Funkcja, która obsługuje zapytanie typu country(country_name);tag(tag).
+	Najpierw wywołuje funkcję country, a następnie wyszukuje w zwracaniej treści zdania ze słowami kluczowymi."""
+
 	string = country(countryName)
 	output = ""
 	tag = " " + tag + " "

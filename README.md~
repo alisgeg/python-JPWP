@@ -2,7 +2,7 @@
 
 
 Aby uruchomić aplikację należy:
--utworzyć folder /flags w miejscu, gdzie znajduje się reszta plików,
+-utworzyć folder ./flags
 -pobrać flagi za pomocą skryptu:
 	python downloadFlags.py
 -uruchomić serwer (wystartuje on na porcie 8009):
