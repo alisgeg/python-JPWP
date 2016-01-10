@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 import country as count
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import os
@@ -10,6 +11,8 @@ import json
 from sys import argv
 import sys  
 import dataaccess
+import urllib2
+from myimage import compare
  
  
 reload(sys)  
@@ -43,7 +46,6 @@ class CountriesHandler(BaseHTTPRequestHandler):
         lub treść pobierana jest z bazy danych. Potem wynik wysyłany jest 
         za pomocą metody respond."""
  
-        # country = "Poland"
         filename = argv
  
         length = int(self.headers['Content-Length'])
@@ -105,8 +107,6 @@ def cacheAndResolveCountryName(url):
     Tworzy (lub nadpisuje) plik, w którym zapisuje pobraną z urla flagę.
     Potem wywołuje funkcję myimage.compare."""
 
-    import urllib2
-    from myimage import compare
     extension = url[-3:]
     image = urllib2.urlopen(url).read()
     tmpFileName = 'test.' + extension

@@ -1,7 +1,9 @@
+# This Python file uses the following encoding: utf-8
 import urllib2
 import os
-import imagereader
+import imread.imread
 import sys
+import numpy as np
 from scipy.misc import imresize
 import numpy as np
 
@@ -12,7 +14,8 @@ def compare(givenImageName):
 	Róznica zapisywana jest na listę, następnie jest przeskalowana, a na koniec
 	zwracana jest nazwa państwa, której przypisana jest najmniejsza różnica."""
 
-	givenImage = imagereader.read(givenImageName)
+	givenImage = imread.imread(givenImageName)
+
 	f = open('countryNames.txt', 'r')
 	listOfCountries = []
 	listOfDiff = []
@@ -21,7 +24,7 @@ def compare(givenImageName):
 
 		tmpFileName = el
 		listOfCountries.append(el)
-		currentImage = imagereader.read('./flags/' + tmpFileName)
+		currentImage = imread.imread('./flags/' + tmpFileName)
 
 		x = currentImage.shape[0]
 		y = currentImage.shape[1]
@@ -53,7 +56,6 @@ def calculateColorDiff(image1, image2):
 	"""Funkcja, która liczy róznicę pomiędzy dwoma podanymi obrazkami na każdym pikselu.
 	Odejmuje ona od siebie kolory RGB, a następnie zwraca ich sumę."""
 
-	import numpy as np
 	diff1 = sum(sum(np.sqrt(abs(image1[:,:,0]-image2[:,:,0]))))
 	diff2 = sum(sum(np.sqrt(abs(image1[:,:,1]-image2[:,:,1]))))
 	diff3 = sum(sum(np.sqrt(abs(image1[:,:,2]-image2[:,:,2]))))

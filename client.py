@@ -1,3 +1,4 @@
+# This Python file uses the following encoding: utf-8
 import requests
 import json
 from subprocess import call, check_call
